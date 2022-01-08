@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UserAPI.Authorization;
 using UserAPI.Helpers;
 using UserAPI.Services;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,10 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
 }
+
+builder.WebHost.UseKestrel(opts=>{
+    opts.Listen(IPAddress.Any,Convert.ToInt32(Environment.GetEnvironmentVariable("PORT")  ?? "5000"));
+});
 
 var app = builder.Build();
 
@@ -76,5 +81,5 @@ using (var scope = app.Services.CreateScope())
     app.MapControllers();
 }
 
-// app.Run();
-app.Run("http://*:4000");
+app.Run();
+// app.Run("http://*:4000");
