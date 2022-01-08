@@ -1,0 +1,8 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: ASPNETCORE_URLS=http://*:$PORT dotnet /app/UserAPI.dll
+
+
+# heroku stack:set container
