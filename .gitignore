@@ -11,3 +11,6 @@ LocalDatabase.db
 
 ### dotenv ###
 .env
+
+# code refs
+/ref
