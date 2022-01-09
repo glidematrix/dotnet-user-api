@@ -8,6 +8,7 @@ obj/
 /wwwroot/node_modules
 
 LocalDatabase.db
+LocalDatabase.*
 
 ### dotenv ###
 .env
