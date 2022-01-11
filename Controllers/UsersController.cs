@@ -7,6 +7,7 @@ using UserAPI.Authorization;
 using UserAPI.Helpers;
 using UserAPI.Models.Users;
 using UserAPI.Services;
+using UserAPI.Entities;
 
 [Authorize]
 [ApiController]
@@ -42,6 +43,17 @@ public class UsersController : ControllerBase
         _userService.Register(model);
         return Ok(new { message = "Registration successful" });
     }
+
+
+    [HttpGet("me")]
+    public IActionResult Test()
+    {
+        var user = (User)HttpContext.Items["User"];
+        // Console.WriteLine(user);
+        // return Ok(new { success = true });
+        return Ok(user);
+    }
+
 
     [HttpGet]
     public IActionResult GetAll()

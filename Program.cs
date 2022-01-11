@@ -31,6 +31,10 @@ var builder = WebApplication.CreateBuilder(args);
     // configure DI for application services
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
+
+
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
 }
 
 builder.WebHost.UseKestrel(opts=>{
@@ -38,6 +42,13 @@ builder.WebHost.UseKestrel(opts=>{
 });
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 // migrate any database changes on startup (includes initial db creation)
 using (var scope = app.Services.CreateScope())
